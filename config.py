@@ -4,7 +4,6 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import os
 import subprocess
-from qtile_extras.widget.decorations import BorderDecoration
 
 
 mod = "mod4"
@@ -120,9 +119,9 @@ colors = [
 def C(x): return x[0] if isinstance(x, (list, tuple)) else x
 
 layout_theme = {
-    "border_width" : 2,
-    "margin" : 0,
-    "border_focus" : colors[8],
+    "border_width" : 1,
+    "margin" : 1,
+    "border_focus" : colors[6],
     "border_normal" : colors[0],
 }
 
@@ -222,14 +221,6 @@ screens = [
                 widget.CPU(
                     foreground = colors[4],
                     padding = 8, 
-                    decorations = [
-                        BorderDecoration(
-                            colour = colors[4],
-                            border_width = [0,0,4,0],
-                            padding_x = 8,
-                            padding_y = None,
-                        )
-                    ],
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e btop')},
                     format="CPU: {load_percent}%",
                 ),
@@ -252,22 +243,22 @@ screens = [
                     fmt = 'Disk: {}',
                     visible_on_warn = False,
                 ),
-                sep,
-                widget.Battery(
-                    foreground=colors[6],           # pick a palette slot you like
-                    padding=8,
-                    update_interval=5,
-                    format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
-                    fmt='Bat: {}',
-                    charge_char='',               # shown while charging
-                    discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
-                    full_char='✔',                 # when at/near 100%
-                    unknown_char='?',
-                    empty_char='!', 
-                    mouse_callbacks={
-                        'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
-                    },
-                ),
+                # sep,
+                # widget.Battery(
+                #     foreground=colors[6],           # pick a palette slot you like
+                #     padding=8,
+                #     update_interval=5,
+                #     format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
+                #     fmt='Bat: {}',
+                #     charge_char='',               # shown while charging
+                #     discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
+                #     full_char='✔',                 # when at/near 100%
+                #     unknown_char='?',
+                #     empty_char='!', 
+                #     mouse_callbacks={
+                #         'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
+                #     },
+                # ),
                 sep,
                 widget.Volume(
                     foreground = colors[7],
@@ -289,8 +280,8 @@ screens = [
             ],
             # 24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-            # margin=[8, 12, 0, 12], 
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"],  # Borders are magenta
+            margin=[0, 0, 1, 0], 
             size=30
         ),
     ),

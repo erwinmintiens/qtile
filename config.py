@@ -229,7 +229,7 @@ screens = [
                     func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
                     foreground = colors[3],
                     padding = 8, 
-                    fmt = '{}',
+                    fmt = 'Kernel {}',
                 ),
                 sep,
                 widget.CPU(
@@ -243,7 +243,7 @@ screens = [
                     foreground = colors[8],
                     padding = 8, 
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e btop')},
-                    format = 'Mem: {MemUsed:.0f}{mm}',
+                    format = 'Mem: {MemUsed:.0f}{mm} ({MemPercent:.0f}%)',
                 ),
                 sep,
                 widget.DF(
@@ -286,7 +286,7 @@ screens = [
                     padding = 8, 
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-date')},
                     ## Uncomment for date and time 
-                    format = "%a, %b %d - %H:%M:%S",
+                    format = "%a, %d %b %Y - %H:%M:%S",
                     ## Uncomment for time only
                     # format = "%I:%M %p",
                 ),

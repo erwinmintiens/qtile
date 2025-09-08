@@ -286,7 +286,7 @@ screens = [
                     padding = 8, 
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-date')},
                     ## Uncomment for date and time 
-                    format = "%a, %b %d - %H:%M",
+                    format = "%a, %b %d - %H:%M:%S",
                     ## Uncomment for time only
                     # format = "%I:%M %p",
                 ),

@@ -60,6 +60,20 @@ keys = [
         lazy.spawn('sh -c "maim -s | xclip -selection clipboard -t image/png -i"'),
         desc="Screenshot"
     ),
+    Key([mod], "b", lazy.spawn("librewolf")),
+    Key([mod], "d", lazy.spawn("dolphin")),
+    Key([mod], "z", lazy.spawn("zeditor")),
+    Key([mod], "e", lazy.spawn("rofi -show drun -show-icons"), desc='Run Launcher'),
+    Key([mod, "shift"], "x", lazy.spawn("betterlockscreen -l")),
+
+    # Volume control using pamixer
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 5")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 5")),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer -t")),
+
+    # Screen brightness control
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -160,7 +174,7 @@ screens = [
             widgets = [
                 widget.Spacer(length = 8),
                 widget.Image(
-                    filename = "~/.config/qtile/icons/tonybtw.png",
+                    filename = "~/.config/qtile/icons/nixos.png",
                     # filename = "~/.config/qtile/icons/debian.png",
                     scale = "False",
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("qtilekeys-yad")},
@@ -243,26 +257,27 @@ screens = [
                     fmt = 'Disk: {}',
                     visible_on_warn = False,
                 ),
-                # sep,
-                # widget.Battery(
-                #     foreground=colors[6],           # pick a palette slot you like
-                #     padding=8,
-                #     update_interval=5,
-                #     format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
-                #     fmt='Bat: {}',
-                #     charge_char='',               # shown while charging
-                #     discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
-                #     full_char='✔',                 # when at/near 100%
-                #     unknown_char='?',
-                #     empty_char='!', 
-                #     mouse_callbacks={
-                #         'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
-                #     },
-                # ),
                 sep,
-                widget.Volume(
+                widget.Battery(
+                    foreground=colors[6],           # pick a palette slot you like
+                    padding=8,
+                    update_interval=5,
+                    format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
+                    fmt='Bat: {}',
+                    charge_char='',               # shown while charging
+                    discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
+                    full_char='✔',                 # when at/near 100%
+                    unknown_char='?',
+                    empty_char='!', 
+                    mouse_callbacks={
+                        'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
+                    },
+                ),
+                sep,
+                widget.PulseVolume(
                     foreground = colors[7],
                     padding = 8, 
+                    update_interval = 0.5,
                     fmt = 'Vol: {}',
                 ),
                 sep,
